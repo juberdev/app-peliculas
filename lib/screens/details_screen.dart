@@ -1,3 +1,4 @@
+import 'package:app_peliculas/widgets/ccasting_cards.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreens extends StatelessWidget {
@@ -15,6 +16,7 @@ class DetailsScreens extends StatelessWidget {
             delegate: SliverChildListDelegate([
           const _PosterAndTitle(),
           const _Overview(),
+          const CastingCards(),
           const _PosterAndTitle()
         ]))
       ],
@@ -39,6 +41,7 @@ class _CustomAppBar extends StatelessWidget {
         title: Container(
           color: Colors.black12,
           width: double.infinity,
+          padding: const EdgeInsets.only(bottom: 10),
           alignment: Alignment.bottomCenter,
           child: const Text(
             'hola',
