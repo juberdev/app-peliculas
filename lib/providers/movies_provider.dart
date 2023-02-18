@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+// import 'dart:convert';
 import 'package:app_peliculas/models/model.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +8,12 @@ class MoviesProvider extends ChangeNotifier {
   final String _apiKey = 'f1aa00fb42d694e08551b56405a516f4';
   final String _baseUrl = 'api.themoviedb.org';
   final String _language = 'es-Es';
+  List<Movie> onDisplayMovies = [];
+  List<Movie> onPopularMovies = [];
   MoviesProvider() {
-    print('movies provider inicializado');
+    // print('movies provider inicializado');
     getOndisplayMovies();
+    getPopularMovies();
   }
 
   getOndisplayMovies() async {
@@ -24,6 +26,23 @@ class MoviesProvider extends ChangeNotifier {
 
     final dataPlayin = NowPlayingResponse.fromRawJson(response.body);
     // final Map<String, dynamic> decodeData = json.decode(response.body);
-    print(dataPlayin.results[0].title);
+    // print(dataPlayin.results[0].title);
+    onDisplayMovies = dataPlayin.results;
+
+    notifyListeners();
+  }
+
+  getPopularMovies() async {
+    var url = Uri.https(_baseUrl, '3/movie/popular',
+        {'api_key': _apiKey, 'language': _language, 'page': '1'});
+
+    final response = await http.get(url);
+
+    final popularResponse = PopularResponse.fromRawJson(response.body);
+    // final Map<String, dynamic> decodeData = json.decode(response.body);
+    // print(dataPlayin.results[0].title);
+    onPopularMovies = [...onPopularMovies, ...popularResponse.results];
+
+    notifyListeners();
   }
 }
