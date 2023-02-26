@@ -47,7 +47,7 @@ class Cast {
   bool adult;
   int gender;
   int id;
-  Department knownForDepartment;
+  Department? knownForDepartment;
   String name;
   String originalName;
   double popularity;
@@ -74,7 +74,7 @@ class Cast {
         adult: json["adult"],
         gender: json["gender"],
         id: json["id"],
-        knownForDepartment: departmentValues.map[json["known_for_department"]]!,
+        knownForDepartment: departmentValues.map[json["known_for_department"]],
         name: json["name"],
         originalName: json["original_name"],
         popularity: json["popularity"]?.toDouble(),
