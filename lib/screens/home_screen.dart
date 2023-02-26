@@ -1,4 +1,5 @@
 import 'package:app_peliculas/providers/movies_provider.dart';
+import 'package:app_peliculas/search/search_delegate.dart';
 import 'package:app_peliculas/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,12 @@ class HomeScreens extends StatelessWidget {
           elevation: 0,
           actions: [
             IconButton(
-                onPressed: () {}, icon: const Icon(Icons.search_outlined))
+              onPressed: () => showSearch(
+                context: context,
+                delegate: MovieSearchDelegate(),
+              ),
+              icon: const Icon(Icons.search_outlined),
+            )
           ],
         ),
         body: SingleChildScrollView(
@@ -31,6 +37,7 @@ class HomeScreens extends StatelessWidget {
               MovieSlider(
                 movies: moviesProvider.onPopularMovies,
                 title: 'pupulares xd',
+                onNextPage: () => moviesProvider.getPopularMovies(),
               ),
               // MovieSlider(),
               // MovieSlider(),
